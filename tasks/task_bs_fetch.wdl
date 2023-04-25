@@ -71,7 +71,10 @@ task fetch_bs {
         echo "cat fwd reads: cat $fwd_read >> ~{sample_name}_R1.fastq.gz" 
         cat $fwd_read >> ~{sample_name}_R1.fastq.gz
         lane_count=$((lane_count+1))
-        mv ~{sample_name}_R1.fastq.gz ~{target_dir_path}/
+        echo $(pwd)
+        echo $(ls)
+        echo $(ls ..)
+        # mv ~{sample_name}_R1.fastq.gz ~{target_dir_path}/
       fi
     done
     ##REV Read
@@ -79,7 +82,7 @@ task fetch_bs {
       if [[ -s $rev_read ]]; then 
         echo "cat rev reads: cat $rev_read >> ~{sample_name}_R2.fastq.gz" 
         cat $rev_read >> ~{sample_name}_R2.fastq.gz
-        mv ~{sample_name}_R2.fastq.gz ~{target_dir_path}/
+        # mv ~{sample_name}_R2.fastq.gz ~{target_dir_path}/
       fi
     done
     echo "Lane Count: ${lane_count}"
