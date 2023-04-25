@@ -6,6 +6,8 @@ import "../tasks/task_bs_fetch.wdl" as fetch
 workflow bs_fetch_to_dir {
 
   meta {
+  author: "Kutluhan Incekara"
+  email: "kutluhan.incekara@ct.gov"
   description: "Basespace FastQ fetch to a directory"
   }
 
