@@ -1,4 +1,4 @@
-version 1.0
+version 1.2
 
 task fetch_bs {
   input {
@@ -12,7 +12,7 @@ task fetch_bs {
     Int CPUs = 2
     Int disk_size = 100
     Int Preemptible = 1
-    String target_dir_path
+    Directory target_dir_path
   }
   command <<<
     # set basespace name and id variables

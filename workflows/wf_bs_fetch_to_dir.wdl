@@ -1,4 +1,4 @@
-version 1.0
+version 1.2
 
 import "../tasks/task_version.wdl" as version
 import "../tasks/task_bs_fetch.wdl" as fetch
@@ -18,7 +18,7 @@ workflow bs_fetch_to_dir {
     String basespace_collection_id
     String api_server
     String access_token
-    String target_dir_path
+    Directory target_dir_path
   }
 
   call version.version_capture {
