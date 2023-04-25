@@ -42,7 +42,4 @@ workflow bs_fetch_to_dir {
     File read1 = fetch_bs.read1
     File? read2 = fetch_bs.read2
   }
-
-
-
 }
