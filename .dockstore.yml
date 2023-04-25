@@ -5,6 +5,3 @@ workflows:
    primaryDescriptorPath: /workflows/bs_fetch_to_dir.wdl
    testParameterFiles:
     - empty.json
-   authors:
-    - name: Kutluhan Incekara
-      email: kutluhan.incekara@ct.gov
