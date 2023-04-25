@@ -1,6 +1,11 @@
 version 1.0
 
 workflow bs_fetch_to_dir {
+
+  meta {
+  description: "Basespace FastQ fetch to a directory"
+  }
+  
   input {
     String sample_name
     String basespace_sample_name
