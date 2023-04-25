@@ -1,0 +1,7 @@
+version: 1.2
+workflows:
+ - name: BS_Fetch_to_Dir
+   subclass: WDL
+   primaryDescriptorPath: /workflows/bs_fetch_to_dir.wdl
+   testParameterFiles:
+    - empty.json
