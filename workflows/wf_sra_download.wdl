@@ -1,6 +1,11 @@
 version 1.0
 
 workflow sra_fastq_download {
+
+  meta {
+  description: "download fastqs from SRA"
+  }
+
   input {
     String sra_id
     String? docker
