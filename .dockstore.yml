@@ -1,7 +1,7 @@
 version: 1.2
 workflows:
- - name: BS_Fetch_to_Dir
+ - name: SRA_Download
    subclass: WDL
-   primaryDescriptorPath: /workflows/wf_bs_fetch_to_dir.wdl
+   primaryDescriptorPath: /workflows/wf_sra_download.wdl
    testParameterFiles:
     - empty.json
