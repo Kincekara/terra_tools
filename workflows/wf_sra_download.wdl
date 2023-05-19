@@ -8,13 +8,11 @@ workflow sra_fastq_download {
 
   input {
     String sra_id
-    String? docker
-  }
+    }
 
   call fasterq_dump {
     input:
-      sra_id = sra_id,
-      docker = docker
+      sra_id = sra_id
   }
 
   output {
@@ -25,8 +23,7 @@ workflow sra_fastq_download {
 
 task fasterq_dump {
   input {
-    String sra_id
-    String docker = "kincekara/sratoolkit:3.0.5"
+    String sra_id    
   }
 
   command <<<
@@ -42,7 +39,7 @@ task fasterq_dump {
   }
 
   runtime {
-    docker: docker
+    docker: "kincekara/sratoolkit:3.0.5"
     memory: "8 GB"
     cpu: 4
     disks: "local-disk 100 SSD"
