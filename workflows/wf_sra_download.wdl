@@ -45,5 +45,5 @@ task fasterq_dump {
     disks: "local-disk 100 SSD"
     preemptible: 1
     maxRetries: 3
-    }
+  }
 }
