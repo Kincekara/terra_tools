@@ -1,4 +1,4 @@
-version 1.2
+version 1.0
 
 import "../tasks/task_version.wdl" as version
 import "../tasks/task_bs_fetch.wdl" as fetch
