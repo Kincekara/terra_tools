@@ -26,11 +26,11 @@ task fasterq_dump {
     String sra_id    
   }
 
-  command <<<
+  command {
     fasterq-dump --version | tee VERSION
     fasterq-dump ~{sra_id}
     pigz *.fastq 
-  >>>
+  }
 
   output {
     String version = read_string("VERSION")
