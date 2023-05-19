@@ -8,19 +8,17 @@ workflow sra_fastq_download {
 
   call fasterq_dump {
     input:
-      sra_accession = sra_accession,
-      docker = docker,
-      disk_size = disk_size,
-      cpus = cpus,
-      memory = memory
+      sra_id = sra_id,
+      docker = docker
   }
+
   output {
     File read1 = fasterq_dump.read1
     File read2 = fasterq_dump.read2
   }
 }
 
-task fasterq-dump {
+task fasterq_dump {
   input {
     String sra_id
     String docker = "kincekara/sratoolkit:3.0.5"
