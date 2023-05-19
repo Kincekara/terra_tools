@@ -8,7 +8,7 @@ workflow sra_fastq_download {
 
   input {
     String sra_id
-    }
+  }
 
   call fasterq_dump {
     input:
@@ -47,5 +47,3 @@ task fasterq_dump {
     maxRetries: 3
     }
 }
-
-
