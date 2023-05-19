@@ -42,11 +42,12 @@ task fasterq_dump {
   }
 
   runtime {
-    docker: "~{docker}"
+    docker: docker
     memory: "8 GB"
     cpu: 4
     disks: "local-disk 100 SSD"
     preemptible: 1
+    maxRetries: 3
     }
 }
 
