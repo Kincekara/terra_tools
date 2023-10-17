@@ -5,7 +5,6 @@ task prep_tables {
     String table_name
     String workspace_name
     String project_name
-    File? input_table
     Array[String] sample_names
     String bioproject
     String gcp_bucket_uri
