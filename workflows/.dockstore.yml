@@ -1,7 +1,0 @@
-version: 1.2
-workflows:
- - name: SRA_prep
-   subclass: WDL
-   primaryDescriptorPath: /workflows/wf_sra_prep.wdl
-   testParameterFiles:
-    - empty.json
