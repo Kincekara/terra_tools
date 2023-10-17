@@ -1,3 +1,2 @@
-# terra_utils
+# Terra helper workflows
 
-Terra helper workflows
