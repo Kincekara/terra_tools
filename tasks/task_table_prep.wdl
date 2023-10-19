@@ -24,7 +24,7 @@ task prep_tables {
     table = pd.read_csv(tablename, delimiter='\t', header=0, dtype={"~{table_name}_id": 'str'}) # ensure sample_id is always a string)
 
     # selected samples only
-    table = table[table["~{table_name}_id"].isin(sample_names)]
+    table = table[table["~{table_name}_id"].isin("~{sep='*' sample_names}".split("*"))]
 
     # prep Microbe 1.0
     microbe = pd.DataFrame(columns=["~{table_name}_id","*sample_name","sample_title","bioproject_accession","*organism", "strain","isolate","host","isolation_source","*collection_date",\
