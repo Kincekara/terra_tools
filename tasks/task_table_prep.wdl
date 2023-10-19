@@ -20,7 +20,7 @@ task prep_tables {
     import numpy as np
 
     # convert table into dataframe
-    tablename = "~{table_name}.tsv"
+    tablename = "~{table_name}-data.tsv"
     table = pd.read_csv(tablename, delimiter='\t', header=0, dtype={"~{table_name}_id": 'str'}) # ensure sample_id is always a string)
 
     # selected samples only
@@ -41,7 +41,8 @@ task prep_tables {
     microbe.loc[:, ["*sample_name","*organism","isolation_source","*collection_date","MLST"]] = table2[["*sample_name","*organism","isolation_source","*collection_date","MLST"]]
     microbe.fillna({"bioproject_accession":"PRJN", "host":"Homo sapiens", "*geo_loc_name":"USA", "*sample_type":"whole organism"}, inplace=True)
     microbe["isolate"] = microbe["*sample_name"]
-    microbe["MLST"] = np.where(microbe["MLST"] != "No ST predicted", "ML" + microbe["MLST"].astype(str), '' )
+    microbe["MLST"] = np.where(microbe["MLST"] != "No ST predicted", "ML" + microbe["MLST"].astype(str), '')
+    microbe["*organism"] = microbe["*organism"].str.split(n=2).str[:2].str.join(" ")
 
     # prep sra_metadata
     sra_meta = pd.DataFrame(columns=["~{table_name}_id", "sample_name", "library_ID", "title", "library_strategy", "library_source", "library_selection", "library_layout", "platform", "instrument_model", "design_description", "filetype", "read1", "read2"])
