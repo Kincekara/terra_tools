@@ -1,8 +1,8 @@
 version 1.0
 
-import "../tasks/task_prep_tables.wdl" as prep
+import "../tasks/task_table_prep.wdl" as prep
 
-workflow SRA_prep {
+workflow sra_prep {
   input {
     String project_name
     String workspace_name
@@ -25,7 +25,6 @@ workflow SRA_prep {
   output {
     File biosample_metadata = prep_tables.biosample_table
     File sra_metadata = prep_tables.sra_table
-    File excluded_samples = prep_tables.excluded_samples
-    String sra_prep_version = "v0.1"
+    String sra_prep_version = "v0.2"
   }
 }
