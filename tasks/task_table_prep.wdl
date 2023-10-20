@@ -39,7 +39,7 @@ task prep_tables {
     table2 = table2.rename(columns={"~{submission_id_column_name}":"*sample_name","~{organism_column_name}":"*organism","collection_date":"*collection_date","mlst":"MLST" })
 
     microbe.loc[:, ["*sample_name","*organism","isolation_source","*collection_date","MLST"]] = table2[["*sample_name","*organism","isolation_source","*collection_date","MLST"]]
-    microbe.fillna({"bioproject_accession":"PRJN", "host":"Homo sapiens", "*geo_loc_name":"USA", "*sample_type":"whole organism"}, inplace=True)
+    microbe.fillna({"bioproject_accession":"~{bioproject}", "host":"Homo sapiens", "*geo_loc_name":"USA", "*sample_type":"whole organism"}, inplace=True)
     microbe["isolate"] = microbe["*sample_name"]
     microbe["MLST"] = np.where(microbe["MLST"] != "No ST predicted", "ML" + microbe["MLST"].astype(str), '')
     microbe["*organism"] = microbe["*organism"].str.split(n=2).str[:2].str.join(" ")
