@@ -45,14 +45,14 @@ task prep_tables {
     microbe["*organism"] = microbe["*organism"].str.split(n=2).str[:2].str.join(" ")
 
     # prep sra_metadata
-    sra_meta = pd.DataFrame(columns=["~{table_name}_id", "sample_name", "library_ID", "title", "library_strategy", "library_source", "library_selection", "library_layout", "platform", "instrument_model", "design_description", "filetype", "read1", "read2"])
+    sra_meta = pd.DataFrame(columns=["~{table_name}_id", "sample_name", "library_ID", "title", "library_strategy", "library_source", "library_selection", "library_layout", "platform", "instrument_model", "design_description", "filetype", "filename", "filename2"])
     sra_meta["~{table_name}_id"] = table["~{table_name}_id"] 
     sra_meta = sra_meta.set_index("~{table_name}_id")
 
     table2["read1"] = table2["read1"].map(lambda filename: filename.split('/').pop())
     table2["read2"] = table2["read2"].map(lambda filename: filename.split('/').pop())
-    table2 = table2.rename(columns={"*sample_name":"sample_name"})
-    sra_meta.loc[:, ["sample_name","read1","read2"]] = table2[["sample_name","read1","read2"]]
+    table2 = table2.rename(columns={"*sample_name":"sample_name", "read1":"filename" , "read2":"filename2"})
+    sra_meta.loc[:, ["sample_name","filename","filename2"]] = table2[["sample_name","filename","filename2"]]
     sra_meta["library_ID"] = sra_meta["sample_name"]
     sra_meta["title"] = "Illumina sequencing of " + sra_meta["sample_name"].astype(str)
     sra_meta.fillna({"library_strategy":"WGS","library_source":"GENOMIC","library_selection":"RANDOM","library_layout":"paired",\
@@ -64,7 +64,7 @@ task prep_tables {
     table["read2"].to_csv("filepaths.tsv", mode='a', index=False, header=False)
 
     # write tables into files
-    microbe.to_csv("microbe.tsv", sep='\t', index=False)
+    microbe.to_csv("microbe.tsv", sep='\t', float_format='%.0f', index=False)
     sra_meta.to_csv("sra_meta.tsv", sep='\t', index=False)
 
     CODE
