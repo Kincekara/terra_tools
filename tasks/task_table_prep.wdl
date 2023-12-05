@@ -10,6 +10,7 @@ task prep_tables {
     String gcp_bucket_uri
     String submission_id_column_name
     String organism_column_name
+    String timestamp
   }
   command <<<
     # download terra table
@@ -64,8 +65,8 @@ task prep_tables {
     table["read2"].to_csv("filepaths.tsv", mode='a', index=False, header=False)
 
     # write tables into files
-    microbe.to_csv("microbe.tsv", sep='\t', float_format='%.0f', index=False)
-    sra_meta.to_csv("sra_meta.tsv", sep='\t', index=False)
+    microbe.to_csv("microbe_~{timestamp}.tsv", sep='\t', float_format='%.0f', index=False)
+    sra_meta.to_csv("sra_meta_~{timestamp}.tsv", sep='\t', index=False)
 
     CODE
     # iterate through file created earlier to grab the uri for each read file
@@ -76,8 +77,8 @@ task prep_tables {
 
   >>>
   output {
-    File biosample_table = "microbe.tsv"
-    File sra_table = "sra_meta.tsv"
+    File biosample_table = "microbe_~{timestamp}.tsv"
+    File sra_table = "sra_meta_~{timestamp}.tsv"
   }
 
   runtime {
