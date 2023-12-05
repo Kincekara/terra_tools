@@ -19,7 +19,7 @@ task version_capture {
   runtime {
     memory: "1 GB"
     cpu: 1
-    docker: "kincekara/bash:alpine"
+    docker: "kincekara/jq:1.6"
     disks: "local-disk 10 HDD"
     dx_instance_type: "mem1_ssd1_v2_x2" 
   }
