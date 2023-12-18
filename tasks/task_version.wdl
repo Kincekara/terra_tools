@@ -1,6 +1,9 @@
 version 1.0
 
 task version_capture {
+  meta {
+    volatile: true
+  }
   input {
     String? timezone
   }
