@@ -11,7 +11,7 @@ task version_capture {
     ttools_version="Terra Tools v0.1"
     ~{default='' 'export TZ=' + timezone}
     date +"%Y-%m-%d" > TODAY
-    echo "$cbird_version" > TOOLS_VERSION
+    echo "$ttools_version" > TOOLS_VERSION
     date +"%Y%m%dT%H%M%S" > DATETIME
   }
   output {
