@@ -45,7 +45,7 @@ task prep_tables {
     microbe["MLST"] = np.where(microbe["MLST"] != "No ST predicted", "ML" + microbe["MLST"].astype(str) + "_Pasteur", '')
     microbe["*organism"] = microbe["*organism"].str.split(n=2).str[:2].str.join(" ")
     # chenge scheme for E.coli
-    microbe["MLST"] = np.where(microbe["*organism"] == "Escherichia coli", microbe["MLST"].str.replace("_Pasteur", "_Achtman", regex=False), microbe["MLST"])
+    microbe["MLST"] = np.where(microbe["*organism"] == "Escherichia coli", microbe["MLST"].replace("_Pasteur", "_Achtman", regex=True), microbe["MLST"])
 
     # prep sra_metadata
     sra_meta = pd.DataFrame(columns=["~{table_name}_id", "sample_name", "library_ID", "title", "library_strategy", "library_source", "library_selection", "library_layout", "platform", "instrument_model", "design_description", "filetype", "filename", "filename2"])
