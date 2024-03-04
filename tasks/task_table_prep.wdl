@@ -42,8 +42,10 @@ task prep_tables {
     microbe.loc[:, ["*sample_name","*organism","isolation_source","*collection_date","MLST"]] = table2[["*sample_name","*organism","isolation_source","*collection_date","MLST"]]
     microbe.fillna({"bioproject_accession":"~{bioproject}", "host":"Homo sapiens", "*geo_loc_name":"USA", "*sample_type":"whole organism"}, inplace=True)
     microbe["isolate"] = microbe["*sample_name"]
-    microbe["MLST"] = np.where(microbe["MLST"] != "No ST predicted", "ML" + microbe["MLST"].astype(str), '')
+    microbe["MLST"] = np.where(microbe["MLST"] != "No ST predicted", "ML" + microbe["MLST"].astype(str) + "_Pasteur", '')
     microbe["*organism"] = microbe["*organism"].str.split(n=2).str[:2].str.join(" ")
+    # chenge scheme for E.coli
+    microbe["MLST"] = np.where(microbe["*organism"] == "Escherichia coli", microbe["MLST"].str.replace("_Pasteur", "_Achtman", regex=False), microbe["MLST"])
 
     # prep sra_metadata
     sra_meta = pd.DataFrame(columns=["~{table_name}_id", "sample_name", "library_ID", "title", "library_strategy", "library_source", "library_selection", "library_layout", "platform", "instrument_model", "design_description", "filetype", "filename", "filename2"])
