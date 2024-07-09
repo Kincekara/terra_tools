@@ -31,22 +31,26 @@ task prep_tables {
     microbe = pd.DataFrame(columns=["~{table_name}_id","*sample_name","sample_title","bioproject_accession","*organism", "strain","isolate","host","isolation_source","*collection_date",\
     "*geo_loc_name","*sample_type","altitude","biomaterial_provider","collected_by","culture_collection","depth","env_broad_scale","genotype",\
     "host_tissue_sampled","identified_by","lab_host","lat_lon","mating_type","passage_history","samp_size","serotype","serovar","specimen_voucher",\
-    "temp","description","MLST"])
+    "temp","description","MLST","scheme"])
 
     microbe["~{table_name}_id"] = table["~{table_name}_id"]
     microbe = microbe.set_index("~{table_name}_id")
 
     table2 = table.set_index("~{table_name}_id")
-    table2 = table2.rename(columns={"~{submission_id_column_name}":"*sample_name","~{organism_column_name}":"*organism","collection_date":"*collection_date","mlst":"MLST" })
+    table2 = table2.rename(columns={"~{submission_id_column_name}":"*sample_name","~{organism_column_name}":"*organism","collection_date":"*collection_date","mlst":"MLST","pubmlst_scheme":"scheme"})
 
-    microbe.loc[:, ["*sample_name","*organism","isolation_source","*collection_date","MLST"]] = table2[["*sample_name","*organism","isolation_source","*collection_date","MLST"]]
+    microbe.loc[:, ["*sample_name","*organism","isolation_source","*collection_date","MLST","scheme"]] = table2[["*sample_name","*organism","isolation_source","*collection_date","MLST","scheme"]]
     microbe.fillna({"bioproject_accession":"~{bioproject}", "host":"Homo sapiens", "*geo_loc_name":"USA", "*sample_type":"whole organism"}, inplace=True)
     microbe["isolate"] = microbe["*sample_name"]
-    microbe["MLST"] = np.where(microbe["MLST"] != "No ST predicted", "ML" + microbe["MLST"].astype(str) + "_Pasteur", '')
     microbe["*organism"] = microbe["*organism"].str.split(n=2).str[:2].str.join(" ")
-    # chenge scheme for E.coli
-    microbe["MLST"] = np.where(microbe["*organism"] == "Escherichia coli", microbe["MLST"].replace("_Pasteur", "_Achtman", regex=True), microbe["MLST"])
-
+    # fix mslt schemes
+    microbe.loc[microbe["scheme"] == "ecoli", "scheme"] = "Pasteur"
+    microbe.loc[microbe["scheme"] == "ecoli_achtman_4", "scheme"] = "Achtman"
+    microbe.loc[microbe["scheme"] == "abaumannii", "scheme"] = "Oxford"
+    microbe.loc[microbe["scheme"] == "abaumannii_2", "scheme"] = "Pasteur"
+    microbe["MLST"] = np.where(microbe["MLST"] != "No ST predicted", "ML" + microbe["MLST"].astype(str) +  "_" + microbe["scheme"], '')
+    microbe.drop(columns=["scheme"], inplace=True)
+   
     # prep sra_metadata
     sra_meta = pd.DataFrame(columns=["~{table_name}_id", "sample_name", "library_ID", "title", "library_strategy", "library_source", "library_selection", "library_layout", "platform", "instrument_model", "design_description", "filetype", "filename", "filename2"])
     sra_meta["~{table_name}_id"] = table["~{table_name}_id"] 
