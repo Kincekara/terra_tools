@@ -11,6 +11,16 @@ task prep_tables {
     String submission_id_column_name
     String organism_column_name
     String timestamp
+    String? library_strategy = "WGS"
+    String? library_source = "GENOMIC"
+    String? library_selection = "RANDOM"
+    String? library_layout = "paired"
+    String? platform = "ILLUMINA"
+    String? instrument_model = "Illumina MiSeq i100"
+    String? design_description = "Paired-end 2x150 reads"
+    String? filetype = "fastq"
+
+
   }
   command <<<
     # download terra table
@@ -62,9 +72,9 @@ task prep_tables {
     sra_meta.loc[:, ["sample_name","filename","filename2"]] = table2[["sample_name","filename","filename2"]]
     sra_meta["library_ID"] = sra_meta["sample_name"]
     sra_meta["title"] = "Illumina sequencing of " + sra_meta["sample_name"].astype(str)
-    sra_meta.fillna({"library_strategy":"WGS","library_source":"GENOMIC","library_selection":"RANDOM","library_layout":"paired",\
-                    "platform":"ILLUMINA","instrument_model":"Illumina MiSeq","design_description":"Illumina MiSeq (V2) paired-end 2x150 reads",\
-                    "filetype":"fastq"}, inplace=True)
+    sra_meta.fillna({"library_strategy":"~{library_strategy}","library_source":"~{library_source}","library_selection":"~{library_selection}","library_layout":"~{library_layout}",\
+                    "platform":"~{platform}","instrument_model":"~{instrument_model}","design_description":"~{esign_description}",\
+                    "filetype":"~{filetype}"}, inplace=True)
 
     # generate a filepaths file for gsutil   
     table["read1"].to_csv("filepaths.tsv", index=False, header=False)
@@ -89,8 +99,8 @@ task prep_tables {
 
   runtime {
     docker: "us-docker.pkg.dev/general-theiagen/theiagen/terra-tools:2023-03-16"
-    memory: "8 GB"
-    cpu: 4
+    memory: "4 GB"
+    cpu: 1
     disks: "local-disk 100 SSD"
     preemptible: 0
   }
