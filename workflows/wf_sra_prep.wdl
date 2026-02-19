@@ -33,7 +33,7 @@ workflow sra_prep {
       sample_names = sample_names,
       bioproject = bioproject,
       gcp_bucket_uri = sra_transfer_gcp_bucket,
-      timestamp = version_capture.timestamp
+      timestamp = version_capture.timestamp,
       library_strategy = library_strategy,
       library_source = library_source,
       library_selection = library_selection,
