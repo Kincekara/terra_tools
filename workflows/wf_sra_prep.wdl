@@ -11,6 +11,14 @@ workflow sra_prep {
     Array[String] sample_names
     String sra_transfer_gcp_bucket # used to be gcp_bucket_uri
     String bioproject
+    String? library_strategy
+    String? library_source
+    String? library_selection
+    String? library_layout
+    String? platform
+    String? instrument_model
+    String? design_description
+    String? filetype
   }
 
   call version.version_capture {
@@ -26,6 +34,14 @@ workflow sra_prep {
       bioproject = bioproject,
       gcp_bucket_uri = sra_transfer_gcp_bucket,
       timestamp = version_capture.timestamp
+      library_strategy = library_strategy,
+      library_source = library_source,
+      library_selection = library_selection,
+      library_layout = library_layout,
+      platform = platform,
+      instrument_model = instrument_model,
+      design_description = design_description,
+      filetype = filetype
   }
 
   output {
