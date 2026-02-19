@@ -73,7 +73,7 @@ task prep_tables {
     sra_meta["library_ID"] = sra_meta["sample_name"]
     sra_meta["title"] = "Illumina sequencing of " + sra_meta["sample_name"].astype(str)
     sra_meta.fillna({"library_strategy":"~{library_strategy}","library_source":"~{library_source}","library_selection":"~{library_selection}","library_layout":"~{library_layout}",\
-                    "platform":"~{platform}","instrument_model":"~{instrument_model}","design_description":"~{esign_description}",\
+                    "platform":"~{platform}","instrument_model":"~{instrument_model}","design_description":"~{design_description}",\
                     "filetype":"~{filetype}"}, inplace=True)
 
     # generate a filepaths file for gsutil   
