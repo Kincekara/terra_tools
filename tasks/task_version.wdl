@@ -8,7 +8,7 @@ task version_capture {
     String? timezone
   }
   command {
-    ttools_version="Terra Tools v0.1"
+    ttools_version="Terra Tools v0.2"
     ~{default='' 'export TZ=' + timezone}
     date +"%Y-%m-%d" > TODAY
     echo "$ttools_version" > TOOLS_VERSION
@@ -20,9 +20,9 @@ task version_capture {
     String timestamp = read_string("DATETIME")
   }
   runtime {
-    memory: "1 GB"
+    memory: "256 MB"
     cpu: 1
-    docker: "kincekara/jq:1.6"
+    docker: "ubuntu:jammy-20251013"
     disks: "local-disk 10 HDD"
     dx_instance_type: "mem1_ssd1_v2_x2" 
   }
