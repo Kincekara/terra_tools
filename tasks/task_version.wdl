@@ -8,7 +8,7 @@ task version_capture {
     String? timezone
   }
   command {
-    ttools_version="Terra Tools v0.2"
+    ttools_version="Terra Tools v0.1"
     ~{default='' 'export TZ=' + timezone}
     date +"%Y-%m-%d" > TODAY
     echo "$ttools_version" > TOOLS_VERSION
