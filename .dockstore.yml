@@ -11,3 +11,4 @@ workflows:
    primaryDescriptorPath: /workflows/wf_redcap_prep.wdl
    testParameterFiles:
     - /empty.json
+    
