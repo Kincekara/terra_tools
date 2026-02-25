@@ -65,3 +65,12 @@ task prep_csv {
     preemptible: 0
   }
 }
+
+task datetime {
+  command {
+    date -u +"%y%m%dT%H%M"
+  }
+  output {
+    String timestamp = read_string(stdout())
+  }
+}

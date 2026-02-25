@@ -1,7 +1,6 @@
 version 1.0
 
 import "../tasks/task_csv_prep.wdl" as csv
-import "../tasks/task_version.wdl" as version
 
 workflow redcap_prep {
   input {    
@@ -13,9 +12,7 @@ workflow redcap_prep {
     String wgs_id_column_name 
   }
 
-  call version.version_capture {
-    input:
-  }
+  call csv.datetime {}
 
   call csv.prep_csv {
     input:
@@ -25,7 +22,7 @@ workflow redcap_prep {
       sample_names = sample_names,
       record_id_column_name = record_id_column_name,
       wgs_id_column_name = wgs_id_column_name,
-      timestamp = version_capture.timestamp
+      timestamp = datetime.timestamp
   }
 
   output {
