@@ -8,7 +8,6 @@ task prep_csv {
   Array[String] sample_names
   String record_id_column_name
   String wgs_id_column_name
-  String timestamp
   }
 
   command <<<
@@ -49,12 +48,12 @@ task prep_csv {
     redcap.drop(columns=["scheme"], inplace=True)
 
     # write df
-    redcap.to_csv("HAIAR_WGS_Data_~{timestamp}.csv", float_format='%.0f', index=False)  
+    redcap.to_csv("HAIAR_WGS_Data.csv", float_format='%.0f', index=False)  
     CODE
   >>>
 
   output {
-    File redcap_input = "HAIAR_WGS_Data_~{timestamp}.csv"
+    File redcap_input = "HAIAR_WGS_Data.csv"
   }
 
   runtime {
@@ -63,14 +62,5 @@ task prep_csv {
     cpu: 1
     disks: "local-disk 10 SSD"
     preemptible: 0
-  }
-}
-
-task datetime {
-  command {
-    date -u +"%y%m%dT%H%M"
-  }
-  output {
-    String timestamp = read_string(stdout())
   }
 }

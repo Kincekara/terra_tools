@@ -12,8 +12,6 @@ workflow redcap_prep {
     String wgs_id_column_name 
   }
 
-  call csv.datetime {}
-
   call csv.prep_csv {
     input:
       workspace_name = workspace_name,
@@ -21,8 +19,7 @@ workflow redcap_prep {
       table_name = table_name,
       sample_names = sample_names,
       record_id_column_name = record_id_column_name,
-      wgs_id_column_name = wgs_id_column_name,
-      timestamp = datetime.timestamp
+      wgs_id_column_name = wgs_id_column_name
   }
 
   output {
