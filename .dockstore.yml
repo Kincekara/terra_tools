@@ -4,4 +4,10 @@ workflows:
    subclass: WDL
    primaryDescriptorPath: /workflows/wf_sra_prep.wdl
    testParameterFiles:
-    - empty.json
+    - /empty.json
+    
+ - name: RedCAP_prep
+   subclass: WDL
+   primaryDescriptorPath: /workflows/wf_redcap_prep.wdl
+   testParameterFiles:
+    - /empty.json
