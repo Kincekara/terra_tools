@@ -27,7 +27,7 @@ task prep_csv {
     table = table[table["~{table_name}_id"].isin("~{sep='*' sample_names}".split("*"))]
 
     # prep csv for redcap data import
-    redcap = pd.Dataframe(columns=["~{table_name}_id","record_id", "arln_specimen_id", "phl",	"wgs_status", "wgs_id",	
+    redcap = pd.DataFrame(columns=["~{table_name}_id","record_id", "arln_specimen_id", "phl",	"wgs_status", "wgs_id",	
     "srr_number",	"bacterial_wgs_result",	"reglab_comment",	"srx_number", "wgs_date_id_created","wgs_date_put_on_sequencer", "wgs_date_sent_to_seqfac",
     "scheme"])
     
