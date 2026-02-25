@@ -47,6 +47,6 @@ workflow sra_prep {
   output {
     File biosample_metadata = prep_tables.biosample_table
     File sra_metadata = prep_tables.sra_table
-    String sra_prep_version = "v0.7"
+    String sra_prep_version = "v0.8"
   }
 }

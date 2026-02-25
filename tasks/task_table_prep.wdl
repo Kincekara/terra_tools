@@ -16,7 +16,7 @@ task prep_tables {
     String? library_selection = "RANDOM"
     String? library_layout = "paired"
     String? platform = "ILLUMINA"
-    String? instrument_model = "Illumina MiSeq i100"
+    String? instrument_model = "MiSeq i100"
     String? design_description = "Paired-end 2x150 reads"
     String? filetype = "fastq"
 
