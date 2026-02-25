@@ -35,9 +35,9 @@ task prep_csv {
     redcap = redcap.set_index("~{table_name}_id")
 
     table2 = table.set_index("~{table_name}_id")
-    table2 = table2.rename(columns={"~{record_id_column_name}":"record_id","~{wgs_id_column_name}":"wgs_id", "SRR_id":"srr_number", "mlst":"bacterial_wgs_result","pubmlst_scheme":"scheme"})
+    table2 = table2.rename(columns={"~{record_id_column_name}":"record_id","~{wgs_id_column_name}":"wgs_id", "SRA_id":"srr_number", "mlst":"bacterial_wgs_result","pubmlst_scheme":"scheme"})
 
-    redcap.loc[:, ["record_id", "wgs_id", "srr_number", "bacterial_wgs_results", "scheme"]] = table2[["record_id", "wgs_id", "srr_number", "bacterial_wgs_results", "scheme"]]
+    redcap.loc[:, ["record_id", "wgs_id", "srr_number", "bacterial_wgs_result", "scheme"]] = table2[["record_id", "wgs_id", "srr_number", "bacterial_wgs_result", "scheme"]]
     redcap["arln_specimen_id"] = redcap["record_id"]
     redcap.fillna({"phl":"CT", "wgs_status":"WGS Successful"}, inplace=True)
     # fix mslt schemes
