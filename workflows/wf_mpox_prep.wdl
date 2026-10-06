@@ -1,6 +1,6 @@
 version 1.0
 
-import "../tasks/task_table_prep.wdl" as prep
+import "../tasks/task_pathogen.wdl" as prep
 import "../tasks/task_version.wdl" as version
 
 workflow sra_prep {
