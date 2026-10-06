@@ -92,8 +92,8 @@ task prep_tables {
     sra_meta["~{table_name}_id"] = table["~{table_name}_id"] 
     sra_meta = sra_meta.set_index("~{table_name}_id")
 
-    table2["read1_dehosted"] = table2["read1"].map(lambda filename: filename.split('/').pop())
-    table2["read2_dehosted"] = table2["read2"].map(lambda filename: filename.split('/').pop())
+    table2["read1_dehosted"] = table2["read1_dehosted"].map(lambda filename: filename.split('/').pop())
+    table2["read2_dehosted"] = table2["read2_dehosted"].map(lambda filename: filename.split('/').pop())
     table2 = table2.rename(columns={"*sample_name":"sample_name", "read1_dehosted":"filename" , "read2_dehosted":"filename2"})
     sra_meta.loc[:, ["sample_name","filename","filename2"]] = table2[["sample_name","filename","filename2"]]
     sra_meta["library_ID"] = sra_meta["sample_name"]
