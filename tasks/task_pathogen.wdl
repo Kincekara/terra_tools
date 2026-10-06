@@ -92,9 +92,9 @@ task prep_tables {
     sra_meta["~{table_name}_id"] = table["~{table_name}_id"] 
     sra_meta = sra_meta.set_index("~{table_name}_id")
 
-    table2["read1"] = table2["read1"].map(lambda filename: filename.split('/').pop())
-    table2["read2"] = table2["read2"].map(lambda filename: filename.split('/').pop())
-    table2 = table2.rename(columns={"*sample_name":"sample_name", "read1":"filename" , "read2":"filename2"})
+    table2["read1_dehosted"] = table2["read1"].map(lambda filename: filename.split('/').pop())
+    table2["read2_dehosted"] = table2["read2"].map(lambda filename: filename.split('/').pop())
+    table2 = table2.rename(columns={"*sample_name":"sample_name", "read1_dehosted":"filename" , "read2_dehosted":"filename2"})
     sra_meta.loc[:, ["sample_name","filename","filename2"]] = table2[["sample_name","filename","filename2"]]
     sra_meta["library_ID"] = sra_meta["sample_name"]
     sra_meta["title"] = "Illumina sequencing of " + sra_meta["sample_name"].astype(str)
@@ -103,8 +103,8 @@ task prep_tables {
                     "filetype":"~{filetype}"}, inplace=True)
 
     # generate a filepaths file for gsutil   
-    table["read1"].to_csv("filepaths.tsv", index=False, header=False)
-    table["read2"].to_csv("filepaths.tsv", mode='a', index=False, header=False)
+    table["read1_dehosted"].to_csv("filepaths.tsv", index=False, header=False)
+    table["read2_dehosted"].to_csv("filepaths.tsv", mode='a', index=False, header=False)
 
     # write tables into files
     # microbe.to_csv("microbe_~{timestamp}.tsv", sep='\t', float_format='%.0f', index=False)
