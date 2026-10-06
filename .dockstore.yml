@@ -11,4 +11,9 @@ workflows:
    primaryDescriptorPath: /workflows/wf_redcap_prep.wdl
    testParameterFiles:
     - /empty.json
-    
+
+ - name: MPOX_prep
+   subclass: WDL
+   primaryDescriptorPath: /workflows/wf_mpox_prep.wdl
+   testParameterFiles:
+    - /empty.json
