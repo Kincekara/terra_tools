@@ -52,8 +52,8 @@ task prep_tables {
     # prep Pathogen 1.0
     pathogen = pd.DataFrame(columns=["~{table_name}_id","*sample_name","sample_title","bioproject_accession","*organism", "strain","isolate",\
     "*collected_by","*collection_date", "*geo_loc_name", "*host", "*host_disease", "*isolation_source", "*lat_lon", "culture_collection", \
-    "genotype", "*host_age", "host_description", "host_disease_outcome", "host_disease_stage", "host_health_state", "host_sex", "host_subject_id",\
-    "*host_tissue_sampled", "passage_history", "pathotype", "serotype", "serovar", "specimen_voucher", "subgroup", "subtype", "description"])
+    "genotype", "host_age", "host_description", "host_disease_outcome", "host_disease_stage", "host_health_state", "host_sex", "host_subject_id",\
+    "host_tissue_sampled", "passage_history", "pathotype", "serotype", "serovar", "specimen_voucher", "subgroup", "subtype", "description"])
 
     pathogen["~{table_name}_id"] = table["~{table_name}_id"]
     pathogen = pathogen.set_index("~{table_name}_id")
